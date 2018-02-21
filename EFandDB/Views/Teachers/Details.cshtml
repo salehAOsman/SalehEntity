@@ -1,0 +1,47 @@
+﻿@model EFandDB.Models.Teacher
+@{ViewBag.Title = "Details Teacher";}
+
+<div>
+    <h4>Teacher Details</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(model => model.Name)</dt>
+        <dd>@Html.DisplayFor(model => model.Name)</dd>
+        <dt>@Html.DisplayNameFor(model => model.City)</dt>
+        <dd>@Html.DisplayFor(model => model.City)</dd>
+    </dl>
+</div>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-info" }) |
+    @Html.ActionLink("Add Course", "AddCourseToTeacher", new { tId = Model.Id}, new { @class = "btn btn-info" })|
+    @Html.ActionLink("Back To List", "Index")
+</p>
+
+@if (Model.Courses.Count > 0)
+{
+<table class="table">
+    <thead>
+     <tr>
+        <th>@Html.DisplayNameFor(model =>model.Courses[0].Name)</th>
+        <th>@Html.DisplayNameFor(model => model.Courses[0].Description)</th>
+         <th></th>
+     </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Courses)
+{
+    <tr>
+        <td>@Html.DisplayFor(modelItem => item.Name)</td>
+        <td>@Html.DisplayFor(modelItem => item.Description)</td>
+        <td>
+            @Html.ActionLink("Details", "Details","Courses", new {id=item.Id },new { @class="btn btn-info"}) |
+            @Html.ActionLink("Delete", "DeleteCourseFromTeacher", new { cId = item.Id, tId = Model.Id },new {@class="btn btn-danger" })
+        </td>
+    </tr>
+}
+    </tbody>
+</table>
+}
+else
+{<p>"This Teacher is not in any Courses at the moment"</p>}

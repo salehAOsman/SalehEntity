@@ -1,0 +1,64 @@
+﻿@model EFandDB.Models.Student
+@*@model IEnumerable<EFandDB.Models.Course>*@
+@*@using EFandDB.Models*@
+@{ViewBag.Title = "Details Student"; }
+<h2>Details Student</h2>
+<div>
+    <h4>Student</h4><hr />
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(model => model.Name)</dt>
+        <dd>@Html.DisplayFor(model => model.Name)</dd>
+        <dt>@Html.DisplayNameFor(model => model.City)</dt>
+        <dd>@Html.DisplayFor(model => model.City)</dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @*@Html.ActionLink("Details", "Details", new { id = Model.Id }) |*@
+    <!--1 change to 'Add Course' to Student and change id to sId -->
+    @Html.ActionLink("Add Course", "AddCourseToStudent", new { sId = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+<!--2 we add here div to display subList of courses for this student-->
+<h2>Index SubCourse in student side</h2>
+@if (Model.Courses.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @*Name*@
+                    @Html.DisplayNameFor(model => model.Courses[0].Name)
+                </th>
+                <th>
+                    @*Description*@
+                    @Html.DisplayNameFor(model => model.Courses[0].Description)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model.Courses)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                    <td>
+                        @*@Html.ActionLink("Edit", "Edit", "Courses", new { id = item.Id }, new { @class = "btn btn-info" }) |*@
+                        @Html.ActionLink("Details", "Details", "Courses", new { id = item.Id }, new { @class = "btn btn-info" }) |
+                        @Html.ActionLink("Delete", "DeleteCourseFromStudent", new { cId = item.Id, sId = Model.Id }, new { @class = "btn btn-danger" }) 
+                       
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <!--3 now we have to change in 'Details' action to be as 'AddCourseToStudent' in student controller -->
+}
+else
+{
+        <p>This Student is not in any Courses at the moment</p>
+}
+

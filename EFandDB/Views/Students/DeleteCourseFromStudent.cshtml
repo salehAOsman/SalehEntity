@@ -1,0 +1,33 @@
+﻿
+<!--We have here to bring our Viewmodel class to read our objects--->
+
+@model EFandDB.Models.SudentCourseViewModel
+
+@{ ViewBag.Title = "DeleteCourseFromStudent";}
+
+<h2>Delete Course From Student</h2>
+
+<div>
+    <h4>Student</h4>
+    <hr />
+    <!--just add reference to student or course as down to display them-->
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(model => model.Student.Name)</dt><dd>@Html.DisplayFor(model => model.Student.Name)</dd>
+        <dt>@Html.DisplayNameFor(model => model.Student.City)</dt><dd>@Html.DisplayFor(model => model.Student.City)</dd>
+    </dl>
+</div>
+<div>
+    <h4>Courses of student </h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt> @Html.DisplayNameFor(model => model.Course.Name)</dt><dd>@Html.DisplayFor(model => model.Course.Name)</dd>
+        <dt> @Html.DisplayNameFor(model => model.Course.Description)</dt><dd> @Html.DisplayFor(model => model.Course.Description)</dd>
+    </dl>
+</div>
+
+<dl>
+    <!--we add here new rout object to go as input to 'Details' action -->
+    @Html.ActionLink("Cancel", "Details", "Students", new { id = Model.Student.Id }, new { @class = "btn btn-info" })|
+    <!--we need to call cofirm action but it need also input sId and cId-->
+    @Html.ActionLink("Confirmed Delete", "ConfirmedDeleteCourseFromStudent", new { sId = Model.Student.Id, cId = Model.Course.Id }, new { @class = "btn btn-danger" })
+</dl>

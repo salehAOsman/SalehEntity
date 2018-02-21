@@ -1,0 +1,22 @@
+﻿@model EFandDB.Models.Assignment
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Assignment Details</h2>
+
+<div>
+    <h4>Assignment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(model => model.Name)</dt>
+        <dd>@Html.DisplayFor(model => model.Name)</dd>
+        <dt>@Html.DisplayNameFor(model => model.Descriptions)</dt>
+        <dd>@Html.DisplayFor(model => model.Descriptions)</dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id },new { @class="btn btn-Info"}) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

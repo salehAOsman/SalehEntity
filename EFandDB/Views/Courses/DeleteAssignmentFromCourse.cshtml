@@ -1,0 +1,30 @@
+﻿@model EFandDB.Models.AssignmentCourseViewModel
+
+@{
+    ViewBag.Title = "DeleteAssignmentFromCourse";
+}
+<h2>Delete Assignment From Course</h2>
+<div>
+    <h4>Assignment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(model => model.Assignment.Name)</dt><dd>@Html.DisplayFor(model => model.Assignment.Name)</dd>
+        <dt>@Html.DisplayNameFor(model => model.Assignment.Descriptions)</dt><dd>@Html.DisplayFor(model => model.Assignment.Descriptions)</dd>
+    </dl>
+</div>
+
+<div>
+    <h4>Course</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(model => model.Course.Name)</dt>
+        <dd>@Html.DisplayFor(model => model.Course.Name)</dd>
+        <dt>@Html.DisplayNameFor(model => model.Course.Description)</dt>
+        <dd>@Html.DisplayFor(model => model.Course.Description)</dd>
+    </dl>
+</div>
+
+<dl>
+    @Html.ActionLink("Cancel", "Details", "Assignments", new { id = Model.Assignment.Id }, new {@class="btn btn-Warning" }) |
+    @Html.ActionLink("Confirmed Delete", "ConfirmedDeleteAssignmentFromCourse", new { aId = Model.Assignment.Id, cId = Model.Course.Id }, new { @class = "btn btn-danger" })
+</dl>
